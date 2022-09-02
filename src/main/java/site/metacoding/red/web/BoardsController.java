@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.red.domain.boards.Boards;
 import site.metacoding.red.domain.boards.BoardsDao;
+import site.metacoding.red.web.dto.request.boards.BoardsDto;
+import site.metacoding.red.web.dto.request.boards.UpdateDto;
 import site.metacoding.red.web.dto.request.boards.WriteDto;
 import site.metacoding.red.web.dto.response.RespDto;
 
@@ -21,9 +23,9 @@ public class BoardsController {
 
 	private final BoardsDao boardsDao;
 	
-	@GetMapping("/boards/{id}")
+		@GetMapping("/boards/{id}")
 	public RespDto<?> getBoards(@PathVariable Integer id) {
-		return new RespDto<>(1, "성공", boardsDao.findById(id));
+		return new RespDto<>(1, "성공", boardsDao.findByIdtoDetail(id));
 	}
 	
 	@GetMapping("/boards")
@@ -38,16 +40,17 @@ public class BoardsController {
 	}
 	
 	@PutMapping("/boards/{id}")
-	public RespDto<?> update(@PathVariable Integer id, WriteDto writeDto){
+	public RespDto<?> update(@PathVariable Integer id, UpdateDto updateDto){
 		Boards boardsPS = boardsDao.findById(id);
-		boardsPS.전체수정(writeDto);
+		boardsPS.전체수정(updateDto);
 		boardsDao.update(boardsPS);
 		return new RespDto<>(1, "수정완료", null);
 	}
 	
+	
 	@DeleteMapping("/boards/{id}")
-	public RespDto<?> delete(@PathVariable Integer id){
-		boardsDao.deletById(id);
+	public RespDto<?> deleteById(@PathVariable Integer id){
+		boardsDao.deleteById(id);
 		return new RespDto<>(1, "삭제완료", null);
 	}
 }

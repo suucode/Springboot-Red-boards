@@ -3,7 +3,7 @@ package site.metacoding.red.domain.boards;
 import java.sql.Timestamp;
 
 import lombok.Getter;
-import site.metacoding.red.web.dto.request.boards.WriteDto;
+import site.metacoding.red.web.dto.request.boards.UpdateDto;
 
 @Getter
 public class Boards {
@@ -13,8 +13,8 @@ public class Boards {
 	private Integer usersId;
 	private Timestamp createdAt;
 	
-	public void 전체수정(WriteDto writeDto) {
-		this.title = writeDto.getTitle();
-		this.content = writeDto.getContent();
+	public void 전체수정(UpdateDto updateDto) {
+		this.title = updateDto.getTitle();
+		this.content = updateDto.getContent();
 	}
 }
